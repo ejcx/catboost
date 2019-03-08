@@ -1,0 +1,14 @@
+base: ubuntu:16.04
+setup: # global setup steps here
+environment: # global env vars here
+targets:
+- name: tutorial
+  language: c++
+  setup:
+    - CXX=$FUZZ_CXX -c ya make -r
+  harness: 
+    binary: ./target
+  sanitizers:
+    address: detect_stack_use_after_return=1
+  corpus: ./corpus
+
